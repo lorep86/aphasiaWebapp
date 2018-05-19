@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Images WebApp</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		 crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<style>
+		input, textarea, select {
+			width : 300px;
+			height: 80px;
+			padding: 12px 20px;
+    	margin: 8px 0;
+			box-sizing: border-box;
+			font-size:30px;
+		}
+
+		button {
+			width : 300;
+			height: 80px;
+			font-size:30px;
+		}
+
+	</style>
+
+	</head>
+  <body>
+
+    <div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-6">
+							<img id="image" alt="Object Image" src="{{ path }}">
+						</div>
+						<div class="col-md-6">
+							<table>
+								<tr>
+									<h2 id="name">{{ name }}</h2>
+								</tr>
+								<tr>
+									<form name="text-query" action="/name" method="post">
+										<input type="text" name="inputName">
+										<input type="submit" value="Verifica">
+									</form>
+								</tr>
+							</table>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col-md-4">
+						<button id="reload" type="button" class="btn btn-success">
+							Nuova
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$("#reload").on("click", function (e) {
+				e.preventDefault();
+				$.ajax({
+					url: "/reload",
+					success: function (data) {
+						$("#image").attr("src", data["path"]);
+						$("#name").html(data["name"]);
+					},
+					error: function (result) {
+						alert('impossible to load a new image');
+					}
+				});
+			});
+	</script>
+
+</body>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+</html>
