@@ -45,10 +45,10 @@
 									<h2 id="name">{{ name }}</h2>
 								</tr>
 								<tr>
-									<form name="text-query" action="/name" method="post">
-										<input type="text" name="inputName">
-										<input type="submit" value="Verifica">
-									</form>
+									<div name="text-query">
+										<input id="tag" type="text">
+										<input id="submit" type="submit" value="Verifica">
+									</div>
 								</tr>
 							</table>
 						</div>
@@ -78,6 +78,22 @@
 					}
 				});
 			});
+
+			$("#submit").on("click", function (e) {
+					const tag = document.getElementById("tag").value;
+					e.preventDefault();
+					$.ajax({
+						url: "/name?"+"tag=" + tag,
+						method: "GET",
+						success: function (data) {
+							$("#image").attr("src", data["path"]);
+							$("#name").html(data["name"]);
+						},
+						error: function (result) {
+							alert('impossible to load a new image');
+						}
+					});
+				});
 	</script>
 
 </body>
