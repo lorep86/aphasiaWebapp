@@ -16,7 +16,7 @@
 			width : 300px;
 			height: 80px;
 			padding: 12px 20px;
-    	margin: 8px 0;
+    		margin: 8px 0;
 			box-sizing: border-box;
 			font-size:30px;
 		}
@@ -42,7 +42,7 @@
 						<div class="col-md-6">
 							<table>
 								<tr>
-									<h2 id="name">{{ name }}</h2>
+									<h2 id="name">{{ tag }}</h2>
 								</tr>
 								<tr>
 									<div name="text-query">
@@ -71,7 +71,7 @@
 					url: "/reload",
 					success: function (data) {
 						$("#image").attr("src", data["path"]);
-						$("#name").html(data["name"]);
+						$("#name").html(data["tag"]);
 					},
 					error: function (result) {
 						alert('impossible to load a new image');
@@ -87,7 +87,7 @@
 						method: "GET",
 						success: function (data) {
 							$("#image").attr("src", data["path"]);
-							$("#name").html(data["name"]);
+							$("#name").html(data["tag"]);
 						},
 						error: function (result) {
 							alert('impossible to load a new image');

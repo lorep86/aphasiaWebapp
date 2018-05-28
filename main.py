@@ -7,6 +7,8 @@ from flask import Flask, jsonify, render_template, request, session, redirect, u
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.secret_key = "my secret key"
+app.config["SESSION_TYPE"] = "filesystem"
 mutex = Lock()
 
 
@@ -118,6 +120,4 @@ def _get_random_img():
 
 
 if __name__ == '__main__':
-    app.secret_key = "my secret key"
-    app.config["SESSION_TYPE"] = "filesystem"
-    app.run(host="0.0.0.0", port=80)
+    app.run()
